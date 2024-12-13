@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Nityasha Partner",
-    "slug": "Nityasha-Partner",
+    "name": "N Partner",
+    "slug": "n-partner",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000"
-      }
+      },
+      "package": "com.NityashaPartner",
+      "versionCode": 1
+    },
+    "notification": {
+      "icon": "./assets/images/icon.png",
+      "color": "#000000"
     },
     "web": {
       "bundler": "metro",
@@ -27,15 +33,28 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
+      "router": {
+        "origin": false
+      },
       "eas": {
-        "projectId": "10739ae5-9841-436c-99c0-668a12970f2a"
+        "projectId": "703e961c-7bbf-43f9-99e4-5bc60b4b8eb7"
       }
-    }
+    },
+    "owner": "option_services"
+  },
+  "reactNativeDirectoryCheck": {
+    "listUnknownPackages": false,
+    "exclude": [
+      "@expo-google-fonts/urbanist",
+      "firebase",
+      "pusher-js"
+    ]
   }
 }

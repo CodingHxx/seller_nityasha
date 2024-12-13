@@ -3,46 +3,65 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Screens/Home';
 import messages from './Screens/Messages';
-import WithdrawMoney from './Screens/WithdrawMoney';
-import { HomeIcon, MessageCircleMore, Wallet } from 'lucide-react-native';
+import Profile from './Screens/Profile';
+import { HomeIcon, MessageCircleMore, Wallet, CircleUser, ChartPie } from 'lucide-react-native';
 import { View } from 'react-native';
-
+import Login from '@/app/Screens/Login';
+import SignUp from '@/app/Screens/SignUp';
+import Welcome from './Screens/Welcome';
+import analysis from './Screens/analysis';
+import notification from './Screens/notification';
+import Analysis from './Screens/analysis';
+import Payment from '@/components/Payment';
+import Vemail from '@/app/Screens/Vemail';
+import ChatScreen from './Screens/ChatScreen';
+import EditProfile from './Screens/EditProfile';
+import Colors from '@/constants/Colors';
+import Header from '@/components/Header';
+import Pvt from '@/app/Screens/pvt/index'
+import { NavigationContainer } from '@react-navigation/native';
+import Widowable from '@/app/Screens/Widowable';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function BottomTabs() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarShowLabel: true, // Show the tab labels
+      screenOptions={{
         tabBarStyle: {
-          position: 'absolute', // Ensure it's positioned at the bottom
-          height: '7%', // Custom height
-          backgroundColor: 'transparent', // Transparent background for the tab bar
-          borderTopWidth: 0, // Remove the border for better transparency
-        },
-        tabBarLabelStyle: ({ focused }) => ({
-          fontSize: 12, // Customize the font size of the labels
-          fontWeight: 'bold', // Customize the font weight
-          color: focused ? '#ffffff' : '#131131', // Customize the label color based on focus state
-          marginTop: -5, // Adjust the margin to reduce gap with the icon
-          marginBottom: 0, // Remove any bottom margin if present
-          textAlign: 'center', // Center the text horizontally
-        }),
-        tabBarItemStyle: {
-          paddingVertical: 5, // Adjust vertical padding to control spacing
-        },
-        tabBarActiveTintColor: '#fff', // Active color for icons
-        tabBarInactiveTintColor: '#7B828A', // Inactive color for icons
-      })}
+          backgroundColor: Colors.black,
+          position: "absolute",
+          bottom: 10,
+          justifyContent: "center", // Center vertically
+          alignItems: "center", // Center horizontally
+          alignSelf: "center",
+          height: 63,
+          marginHorizontal: 30,
+          paddingVertical: 8,
+          paddingBottom: 8,
+          borderRadius: 40,  paddingTop: 10,
+          borderWidth: 1,
+          borderTopWidth: 1,
+          width: "80%",
+          borderColor: "#333",
+          borderTopColor: "#333",
+        },        
+        tabBarShowLabel: false,
+        tabBarInactiveTintColor: "#999",
+        tabBarActiveTintColor: Colors.white,
+      }}
     >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View>
-              <HomeIcon color={focused ? '#fff' : '#7B828A'} />
+            <View style={{
+              padding: 10,
+              borderRadius: 30,
+              backgroundColor: focused ? Colors.white : Colors.black,
+            }}>
+              <HomeIcon color={focused ? '#000' : '#7B828A'} />
             </View>
           ),
           headerShown: false, // Hides the header for the "Home" screen
@@ -53,20 +72,44 @@ function BottomTabs() {
         component={messages}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View>
-              <MessageCircleMore color={focused ? '#fff' : '#7B828A'} />
+            <View style={{
+              padding: 10,
+              borderRadius: 30,
+              backgroundColor: focused ? Colors.white : Colors.black,
+            }}>
+              <MessageCircleMore color={focused ? '#000' : '#7B828A'} />
             </View>
           ),
           headerShown: false, // Hides the header for the "Profile" screen
         }}
       />
       <Tab.Screen
-        name="Money"
-        component={WithdrawMoney}
+        name="Analysis"
+        component={Analysis}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View>
-              <Wallet color={focused ? '#fff' : '#7B828A'} />
+            <View style={{
+              padding: 10,
+              borderRadius: 30,
+              backgroundColor: focused ? Colors.white : Colors.black,
+            }}>
+              <ChartPie color={focused ? '#000' : '#7B828A'} />
+            </View>
+          ),
+          headerShown: false, // Hides the header for the "Profile" screen
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{
+              padding: 10,
+              borderRadius: 30,
+              backgroundColor: focused ? Colors.white : Colors.black,
+            }}>
+              <CircleUser color={focused ? '#000' : '#7B828A'} />
             </View>
           ),
           headerShown: false, // Hides the header for the "Profile" screen
@@ -76,12 +119,33 @@ function BottomTabs() {
   );
 }
 
-function App() {
+const IndexPage: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="BottomTabs">
-      <Stack.Screen name="BottomTabs" component={BottomTabs} />
-    </Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+        <Stack.Screen name="BottomTabs" component={BottomTabs} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Analysis" component={analysis} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Notification" component={notification} />
+        <Stack.Screen name="Vemail" component={Vemail} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="Pvt" component={Pvt} />
+        <Stack.Screen
+          name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          options={{
+            presentation: "transparentModal",
+            animation: "slide_from_bottom",
+            animationTypeForReplace: "pop",
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen name="Widowables" component={Widowable} />
+      </Stack.Navigator>
   );
 }
 
-export default App;
+export default IndexPage;
